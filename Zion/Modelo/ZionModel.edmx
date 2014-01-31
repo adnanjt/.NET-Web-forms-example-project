@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ZionModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ZionModelStoreContainer">
+    <EntitySet Name="Personas" EntityType="ZionModel.Store.Personas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Departamentos" EntityType="ZionModel.Store.Departamentos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NotasEstudianteSet" EntityType="ZionModel.Store.NotasEstudianteSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CursoSet" EntityType="ZionModel.Store.CursoSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Personas_Estudiante" EntityType="ZionModel.Store.Personas_Estudiante" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Personas_Docente" EntityType="ZionModel.Store.Personas_Docente" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CursoDocente" EntityType="ZionModel.Store.CursoDocente" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="DepartamentoPersonas" Association="ZionModel.Store.DepartamentoPersonas">
+      <End Role="Departamento" EntitySet="Departamentos" />
+      <End Role="Personas" EntitySet="Personas" />
+    </AssociationSet>
+    <AssociationSet Name="NotasEstudianteEstudiante" Association="ZionModel.Store.NotasEstudianteEstudiante">
+      <End Role="NotasEstudiante" EntitySet="NotasEstudianteSet" />
+      <End Role="Estudiante" EntitySet="Personas_Estudiante" />
+    </AssociationSet>
+    <AssociationSet Name="CursoNotasEstudiante" Association="ZionModel.Store.CursoNotasEstudiante">
+      <End Role="Curso" EntitySet="CursoSet" />
+      <End Role="NotasEstudiante" EntitySet="NotasEstudianteSet" />
+    </AssociationSet>
+    <AssociationSet Name="CursoDepartamento" Association="ZionModel.Store.CursoDepartamento">
+      <End Role="Curso" EntitySet="CursoSet" />
+      <End Role="Departamento" EntitySet="Departamentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CursoDocente_Curso" Association="ZionModel.Store.FK_CursoDocente_Curso">
+      <End Role="Curso" EntitySet="CursoSet" />
+      <End Role="CursoDocente" EntitySet="CursoDocente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CursoDocente_Docente" Association="ZionModel.Store.FK_CursoDocente_Docente">
+      <End Role="Docente" EntitySet="Personas_Docente" />
+      <End Role="CursoDocente" EntitySet="CursoDocente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Estudiante_inherits_Personas" Association="ZionModel.Store.FK_Estudiante_inherits_Personas">
+      <End Role="Personas" EntitySet="Personas" />
+      <End Role="Estudiante" EntitySet="Personas_Estudiante" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Docente_inherits_Personas" Association="ZionModel.Store.FK_Docente_inherits_Personas">
+      <End Role="Personas" EntitySet="Personas" />
+      <End Role="Docente" EntitySet="Personas_Docente" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Personas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombres" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Apellidos" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="Cedula" Type="varchar" Nullable="true" MaxLength="13" />
+    <Property Name="Telefono" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="sexo" Type="varchar" Nullable="false" MaxLength="1" />
+    <Property Name="fecha_nacimiento" Type="datetime" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Departamentos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Clave" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PersonasId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NotasEstudianteSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EstudianteId" Type="int" Nullable="false" />
+    <Property Name="CursoId" Type="int" Nullable="false" />
+    <Property Name="Periodo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nota" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CursoSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Clave" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Credito" Type="smallint" Nullable="false" />
+    <Property Name="DepartamentoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Personas_Estudiante">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Matricula" Type="int" Nullable="false" />
+    <Property Name="PerodoIngreso" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Personas_Docente">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="FechaIngreso" Type="datetime" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CursoDocente">
+    <Key>
+      <PropertyRef Name="Curso_Id" />
+      <PropertyRef Name="Docente_Id" />
+    </Key>
+    <Property Name="Curso_Id" Type="int" Nullable="false" />
+    <Property Name="Docente_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="DepartamentoPersonas">
+    <End Role="Departamento" Type="ZionModel.Store.Departamentos" Multiplicity="*" />
+    <End Role="Personas" Type="ZionModel.Store.Personas" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Personas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Departamento">
+        <PropertyRef Name="PersonasId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NotasEstudianteEstudiante">
+    <End Role="NotasEstudiante" Type="ZionModel.Store.NotasEstudianteSet" Multiplicity="*" />
+    <End Role="Estudiante" Type="ZionModel.Store.Personas_Estudiante" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Estudiante">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NotasEstudiante">
+        <PropertyRef Name="EstudianteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CursoNotasEstudiante">
+    <End Role="Curso" Type="ZionModel.Store.CursoSet" Multiplicity="1" />
+    <End Role="NotasEstudiante" Type="ZionModel.Store.NotasEstudianteSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Curso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NotasEstudiante">
+        <PropertyRef Name="CursoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CursoDepartamento">
+    <End Role="Curso" Type="ZionModel.Store.CursoSet" Multiplicity="*" />
+    <End Role="Departamento" Type="ZionModel.Store.Departamentos" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Departamento">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Curso">
+        <PropertyRef Name="DepartamentoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CursoDocente_Curso">
+    <End Role="Curso" Type="ZionModel.Store.CursoSet" Multiplicity="1" />
+    <End Role="CursoDocente" Type="ZionModel.Store.CursoDocente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Curso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CursoDocente">
+        <PropertyRef Name="Curso_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CursoDocente_Docente">
+    <End Role="CursoDocente" Type="ZionModel.Store.CursoDocente" Multiplicity="*" />
+    <End Role="Docente" Type="ZionModel.Store.Personas_Docente" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Docente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CursoDocente">
+        <PropertyRef Name="Docente_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Estudiante_inherits_Personas">
+    <End Role="Personas" Type="ZionModel.Store.Personas" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Estudiante" Type="ZionModel.Store.Personas_Estudiante" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Personas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Estudiante">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Docente_inherits_Personas">
+    <End Role="Personas" Type="ZionModel.Store.Personas" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Docente" Type="ZionModel.Store.Personas_Docente" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Personas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Docente">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ZionModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ZionModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Personas" EntityType="ZionModel.Personas" />
+          <EntitySet Name="Departamentos" EntityType="ZionModel.Departamento" />
+          <AssociationSet Name="DepartamentoPersonas" Association="ZionModel.DepartamentoPersonas">
+            <End Role="Departamento" EntitySet="Departamentos" />
+            <End Role="Personas" EntitySet="Personas" />
+          </AssociationSet>
+          <EntitySet Name="NotasEstudianteSet" EntityType="ZionModel.NotasEstudiante" />
+          <AssociationSet Name="NotasEstudianteEstudiante" Association="ZionModel.NotasEstudianteEstudiante">
+            <End Role="NotasEstudiante" EntitySet="NotasEstudianteSet" />
+            <End Role="Estudiante" EntitySet="Personas" />
+          </AssociationSet>
+          <EntitySet Name="CursoSet" EntityType="ZionModel.Curso" />
+          <AssociationSet Name="CursoNotasEstudiante" Association="ZionModel.CursoNotasEstudiante">
+            <End Role="Curso" EntitySet="CursoSet" />
+            <End Role="NotasEstudiante" EntitySet="NotasEstudianteSet" />
+          </AssociationSet>
+          <AssociationSet Name="CursoDepartamento" Association="ZionModel.CursoDepartamento">
+            <End Role="Curso" EntitySet="CursoSet" />
+            <End Role="Departamento" EntitySet="Departamentos" />
+          </AssociationSet>
+          <AssociationSet Name="CursoDocente" Association="ZionModel.CursoDocente">
+            <End Role="Curso" EntitySet="CursoSet" />
+            <End Role="Docente" EntitySet="Personas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Personas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nombres" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Apellidos" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Cedula" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Telefono" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="sexo" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Type="DateTime" Name="fecha_nacimiento" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="true" />
+          <NavigationProperty Name="Departamento" Relationship="ZionModel.DepartamentoPersonas" FromRole="Personas" ToRole="Departamento" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="Clave" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Personas" Relationship="ZionModel.DepartamentoPersonas" FromRole="Departamento" ToRole="Personas" />
+          <Property Type="Int32" Name="PersonasId" Nullable="false" />
+          <NavigationProperty Name="Curso" Relationship="ZionModel.CursoDepartamento" FromRole="Departamento" ToRole="Curso" />
+        </EntityType>
+        <Association Name="DepartamentoPersonas">
+          <End Type="ZionModel.Departamento" Role="Departamento" Multiplicity="*" />
+          <End Type="ZionModel.Personas" Role="Personas" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Personas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Departamento">
+              <PropertyRef Name="PersonasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Estudiante" BaseType="ZionModel.Personas" >
+          <Property Type="Int32" Name="Matricula" Nullable="false" />
+          <Property Type="String" Name="PerodoIngreso" Nullable="false" />
+          <NavigationProperty Name="Nota" Relationship="ZionModel.NotasEstudianteEstudiante" FromRole="Estudiante" ToRole="NotasEstudiante" />
+        </EntityType>
+        <EntityType Name="Docente" BaseType="ZionModel.Personas" >
+          <Property Type="DateTime" Name="FechaIngreso" Nullable="false" />
+          <NavigationProperty Name="Curso" Relationship="ZionModel.CursoDocente" FromRole="Docente" ToRole="Curso" />
+        </EntityType>
+        <EntityType Name="NotasEstudiante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Estudiante" Relationship="ZionModel.NotasEstudianteEstudiante" FromRole="NotasEstudiante" ToRole="Estudiante" />
+          <Property Type="Int32" Name="EstudianteId" Nullable="false" />
+          <NavigationProperty Name="Curso" Relationship="ZionModel.CursoNotasEstudiante" FromRole="NotasEstudiante" ToRole="Curso" />
+          <Property Type="Int32" Name="CursoId" Nullable="false" />
+          <Property Type="String" Name="Periodo" Nullable="false" />
+          <Property Type="String" Name="Nota" Nullable="false" />
+        </EntityType>
+        <Association Name="NotasEstudianteEstudiante">
+          <End Type="ZionModel.NotasEstudiante" Role="NotasEstudiante" Multiplicity="*" />
+          <End Type="ZionModel.Estudiante" Role="Estudiante" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotasEstudiante">
+              <PropertyRef Name="EstudianteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="NotasEstudiante" Relationship="ZionModel.CursoNotasEstudiante" FromRole="Curso" ToRole="NotasEstudiante" />
+          <Property Type="String" Name="Clave" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" />
+          <Property Type="Int16" Name="Credito" Nullable="false" />
+          <NavigationProperty Name="Departamento" Relationship="ZionModel.CursoDepartamento" FromRole="Curso" ToRole="Departamento" />
+          <Property Type="Int32" Name="DepartamentoId" Nullable="false" />
+          <NavigationProperty Name="Docente" Relationship="ZionModel.CursoDocente" FromRole="Curso" ToRole="Docente" />
+        </EntityType>
+        <Association Name="CursoNotasEstudiante">
+          <End Type="ZionModel.Curso" Role="Curso" Multiplicity="1" />
+          <End Type="ZionModel.NotasEstudiante" Role="NotasEstudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotasEstudiante">
+              <PropertyRef Name="CursoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CursoDepartamento">
+          <End Type="ZionModel.Curso" Role="Curso" Multiplicity="*" />
+          <End Type="ZionModel.Departamento" Role="Departamento" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Curso">
+              <PropertyRef Name="DepartamentoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CursoDocente">
+          <End Type="ZionModel.Curso" Role="Curso" Multiplicity="*" />
+          <End Type="ZionModel.Docente" Role="Docente" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ZionModelStoreContainer" CdmEntityContainer="ZionModelContainer">
+    <EntitySetMapping Name="Personas">
+      <EntityTypeMapping TypeName="IsTypeOf(ZionModel.Personas)">
+        <MappingFragment StoreEntitySet="Personas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="sexo" ColumnName="sexo" />
+          <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(ZionModel.Estudiante)">
+        <MappingFragment StoreEntitySet="Personas_Estudiante">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+          <ScalarProperty Name="PerodoIngreso" ColumnName="PerodoIngreso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(ZionModel.Docente)">
+        <MappingFragment StoreEntitySet="Personas_Docente">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departamentos">
+      <EntityTypeMapping TypeName="IsTypeOf(ZionModel.Departamento)">
+        <MappingFragment StoreEntitySet="Departamentos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="PersonasId" ColumnName="PersonasId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotasEstudianteSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ZionModel.NotasEstudiante)">
+        <MappingFragment StoreEntitySet="NotasEstudianteSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EstudianteId" ColumnName="EstudianteId" />
+          <ScalarProperty Name="CursoId" ColumnName="CursoId" />
+          <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+          <ScalarProperty Name="Nota" ColumnName="Nota" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CursoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ZionModel.Curso)">
+        <MappingFragment StoreEntitySet="CursoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Credito" ColumnName="Credito" />
+          <ScalarProperty Name="DepartamentoId" ColumnName="DepartamentoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="CursoDocente" TypeName="ZionModel.CursoDocente" StoreEntitySet="CursoDocente">
+      <EndProperty Name="Curso">
+        <ScalarProperty Name="Id" ColumnName="Curso_Id" />
+      </EndProperty>
+      <EndProperty Name="Docente">
+        <ScalarProperty Name="Id" ColumnName="Docente_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

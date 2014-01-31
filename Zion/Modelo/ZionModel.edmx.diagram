@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2657fcedd60545778c6deae5690405ff" Name="Diagram1" >
+        <EntityTypeShape EntityType="ZionModel.Personas" Width="1.5" PointX="0.875" PointY="0.75" />
+        <EntityTypeShape EntityType="ZionModel.Departamento" Width="1.5" PointX="3.625" PointY="2.875" />
+        <AssociationConnector Association="ZionModel.DepartamentoPersonas" />
+        <EntityTypeShape EntityType="ZionModel.Estudiante" Width="1.5" PointX="3.5" PointY="0.75" />
+        <InheritanceConnector EntityType="ZionModel.Estudiante" />
+        <EntityTypeShape EntityType="ZionModel.Docente" Width="1.5" PointX="0.875" PointY="4.5" />
+        <InheritanceConnector EntityType="ZionModel.Docente" />
+        <EntityTypeShape EntityType="ZionModel.NotasEstudiante" Width="1.5" PointX="6.625" PointY="0.75" />
+        <AssociationConnector Association="ZionModel.NotasEstudianteEstudiante" />
+        <EntityTypeShape EntityType="ZionModel.Curso" Width="1.5" PointX="6.5" PointY="3.75" />
+        <AssociationConnector Association="ZionModel.CursoNotasEstudiante" />
+        <AssociationConnector Association="ZionModel.CursoDepartamento" />
+        <AssociationConnector Association="ZionModel.CursoDocente" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

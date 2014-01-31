@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"  ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+    <siteMapNode url="~/" title="Default"  description=""><!--la virculila significa el root-->
+      
+      <siteMapNode url="~/Departamentos.aspx" title="Departamentos"  description="" />
+      <siteMapNode url="~/Cursos.aspx" title="Cursos"  description="" />
+      <siteMapNode url="~/Admin/" title="Admin"  description="" />
+      <siteMapNode url="~/Viewer/" title="Viewer"  description="" />
+      
+      <siteMapNode url="~/RegistroAsignaturas.aspx" title="Registro Asignaturas"  description="" />
+      <siteMapNode url="~/RegistroDepartamentos.aspx" title="Registro Departamentos"  description="" />
+      <siteMapNode url="~/RegistroEstudiantes.aspx" title="Registro Estudiantes"  description="" />
+      <siteMapNode url="~/RegistroPersonal.aspx" title="Registro Personal"  description="" />
+      <siteMapNode url="~/Navigation.aspx" title="Navigation"  description="" />
+      <siteMapNode url="~/About.aspx" title="About"  description="" />
+      <siteMapNode url="~/Contact.aspx" title="Contacto"  description="" />
+    </siteMapNode>
+</siteMap>

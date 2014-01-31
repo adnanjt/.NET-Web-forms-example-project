@@ -19,7 +19,7 @@ namespace Zion
 
             OpenAuth.AuthenticationClients.AddFacebook(
                 appId: "219689341502730",
-                appSecret: "e23635b121c2055ca56a779c8da3e094");
+                appSecret: "e23xxxxxx94");
 
             //OpenAuth.AuthenticationClients.AddMicrosoft(
             //    clientId: "your Microsoft account client id",
